@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - BookHaven</title>
+    <meta name="description" content="Get in touch with BookHaven. Find our contact information, store location, and send us a message about books, orders, or literary inquiries.">
+    
+    <!-- External Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Tailwind Custom Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#1e3a5f',
+                        'secondary': '#d4af37',
+                        'warm-gray': {
+                            50: '#fafaf9',
+                            100: '#f5f5f4',
+                            200: '#e7e5e4',
+                            300: '#d6d3d1',
+                            400: '#a8a29e',
+                            500: '#78716c',
+                            600: '#57534e',
+                            700: '#44403c',
+                            800: '#292524',
+                            900: '#1c1917',
+                        }
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-warm-gray-50 font-sans text-warm-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <i class="fas fa-book-open text-2xl text-primary"></i>
+                        <span class="font-serif text-2xl font-bold text-primary">BookHaven</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-warm-gray-700 hover:text-primary hover:bg-warm-gray-100 transition-colors">Home</a>
+                        <div class="relative group">
+                            <button class="nav-link px-3 py-2 rounded-md text-sm font-medium text-warm-gray-700 hover:text-primary hover:bg-warm-gray-100 transition-colors flex items-center">
+                                Categories <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </button>
+                            <div class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                                <div class="py-1">
+                                    <a href="categories.html?category=fiction" class="block px-4 py-2 text-sm text-warm-gray-700 hover:bg-warm-gray-100 hover:text-primary">Fiction</a>
+                                    <a href="categories.html?category=non-fiction" class="block px-4 py-2 text-sm text-warm-gray-700 hover:bg-warm-gray-100 hover:text-primary">Non-Fiction</a>
+                                    <a href="categories.html?category=childrens" class="block px-4 py-2 text-sm text-warm-gray-700 hover:bg-warm-gray-100 hover:text-primary">Children's Books</a>
+                                    <a href="categories.html?category=bestsellers" class="block px-4 py-2 text-sm text-warm-gray-700 hover:bg-warm-gray-100 hover:text-primary">Bestsellers</a>
+                                    <a href="categories.html?category=new-releases" class="block px-4 py-2 text-sm text-warm-gray-700 hover:bg-warm-gray-100 hover:text-primary">New Releases</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="offers.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-warm-gray-700 hover:text-primary hover:bg-warm-gray-100 transition-colors">Offers</a>
+                        <a href="blog.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-warm-gray-700 hover:text-primary hover:bg-warm-gray-100 transition-colors">Blog</a>
+                        <a href="about.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-warm-gray-700 hover:text-primary hover:bg-warm-gray-100 transition-colors">About</a>
+                        <a href="contact.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-primary bg-warm-gray-100 transition-colors">Contact</a>
+                    </div>
+                </div>
+                
+                <!-- Search and Cart -->
+                <div class="flex items-center space-x-4">
+                    <!-- Search -->
+                    <div class="relative">
+                        <button class="search-toggle p-2 text-warm-gray-600 hover:text-primary transition-colors">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <div class="search-popup absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl border p-4 opacity-0 invisible transition-all duration-300 z-50">
+                            <div class="flex">
+                                <input type="text" id="search-input" placeholder="Search by title, author, or genre..." class="flex-1 px-3 py-2 border border-warm-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <button class="search-btn px-4 py-2 bg-primary text-white rounded-r-md hover:bg-primary-dark transition-colors">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            <div id="search-results" class="mt-3 max-h-60 overflow-y-auto"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Cart -->
+                    <div class="relative">
+                        <button class="cart-toggle p-2 text-warm-gray-600 hover:text-primary transition-colors relative">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cart-count" class="absolute -top-1 -right-1 bg-secondary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                        </button>
+                        <div class="cart-popup absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl border opacity-0 invisible transition-all duration-300 z-50">
+                            <div class="p-4 border-b">
+                                <h3 class="font-semibold text-lg">Shopping Cart</h3>
+                            </div>
+                            <div id="cart-items" class="p-4 max-h-60 overflow-y-auto">
+                                <p class="text-warm-gray-500 text-center py-8">Your cart is empty</p>
+                            </div>
+                            <div class="p-4 border-t">
+                                <div class="flex justify-between items-center mb-3">
+                                    <span class="font-semibold">Total: </span>
+                                    <span id="cart-total" class="font-bold text-lg">₹0.00</span>
+                                </div>
+                                <button class="w-full bg-primary text-white py-2 rounded-md hover:bg-primary-dark transition-colors disabled:bg-warm-gray-300" disabled>
+                                    Checkout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile menu button -->
+                    <div class="md:hidden">
+                        <button class="mobile-menu-toggle p-2 text-warm-gray-600 hover:text-primary">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="mobile-menu hidden md:hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-warm-gray-700 hover:text-primary hover:bg-warm-gray-100">Home</a>
+                <a href="categories.html?category=fiction" class="block px-3 py-2 text-warm-gray-700 hover:text-primary hover:bg-warm-gray-100">Fiction</a>
+                <a href="categories.html?category=non-fiction" class="block px-3 py-2 text-warm-gray-700 hover:text-primary hover:bg-warm-gray-100">Non-Fiction</a>
+                <a href="categories.html?category=childrens" class="block px-3 py-2 text-warm-gray-700 hover:text-primary hover:bg-warm-gray-100">Children's Books</a>
+                <a href="categories.html?category=bestsellers" class="block px-3 py-2 text-warm-gray-700 hover:text-primary hover:bg-warm-gray-100">Bestsellers</a>
+                <a href="categories.html?category=new-releases" class="block px-3 py-2 text-warm-gray-700 hover:text-primary hover:bg-warm-gray-100">New Releases</a>
+                <a href="offers.html" class="block px-3 py-2 text-warm-gray-700 hover:text-primary hover:bg-warm-gray-100">Offers</a>
+                <a href="blog.html" class="block px-3 py-2 text-warm-gray-700 hover:text-primary hover:bg-warm-gray-100">Blog</a>
+                <a href="about.html" class="block px-3 py-2 text-warm-gray-700 hover:text-primary hover:bg-warm-gray-100">About</a>
+                <a href="contact.html" class="block px-3 py-2 text-primary bg-warm-gray-100">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-primary to-primary-dark text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="font-serif text-4xl md:text-5xl font-bold mb-4">Get in Touch</h1>
+                <p class="text-lg text-warm-gray-200 max-w-2xl mx-auto">
+                    Have questions about books? Need reading recommendations? We're here to help you on your literary journey.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- Contact Form -->
+                <div>
+                    <h2 class="font-serif text-3xl font-bold text-primary mb-6">Send us a Message</h2>
+                    <p class="text-warm-gray-700 mb-8 leading-relaxed">
+                        Whether you're looking for a specific book, need recommendations, or have questions about your order, we'd love to hear from you.
+                    </p>
+                    
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="first-name" class="block text-sm font-semibold text-primary mb-2">First Name *</label>
+                                <input type="text" id="first-name" name="firstName" required class="form-input" placeholder="Your first name">
+                            </div>
+                            <div>
+                                <label for="last-name" class="block text-sm font-semibold text-primary mb-2">Last Name *</label>
+                                <input type="text" id="last-name" name="lastName" required class="form-input" placeholder="Your last name">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-primary mb-2">Email Address *</label>
+                            <input type="email" id="email" name="email" required class="form-input" placeholder="your.email@example.com">
+                        </div>
+                        
+                        <div>
+                            <label for="phone" class="block text-sm font-semibold text-primary mb-2">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="+91 98765 43210">
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-sm font-semibold text-primary mb-2">Subject *</label>
+                            <select id="subject" name="subject" required class="form-input">
+                                <option value="">Select a topic</option>
+                                <option value="book-inquiry">Book Inquiry</option>
+                                <option value="recommendation">Book Recommendation Request</option>
+                                <option value="order-support">Order Support</option>
+                                <option value="general-inquiry">General Inquiry</option>
+                                <option value="book-club">Book Club Information</option>
+                                <option value="author-event">Author Event Inquiry</option>
+                                <option value="feedback">Feedback & Suggestions</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-semibold text-primary mb-2">Message *</label>
+                            <textarea id="message" name="message" required class="form-textarea" placeholder="Tell us how we can help you..."></textarea>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <input type="checkbox" id="newsletter-signup" name="newsletterSignup" class="filter-checkbox mt-1">
+                            <label for="newsletter-signup" class="ml-2 text-sm text-warm-gray-700">
+                                Subscribe to our newsletter for book recommendations and special offers
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-primary text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-dark transform hover:scale-105 transition-all duration-200">
+                            <i class="fas fa-paper-plane mr-2"></i>Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Contact Information -->
+                <div>
+                    <h2 class="font-serif text-3xl font-bold text-primary mb-6">Contact Information</h2>
+                    
+                    <!-- Contact Cards -->
+                    <div class="space-y-6 mb-8">
+                        <div class="bg-warm-gray-50 rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-primary text-white rounded-full p-3">
+                                    <i class="fas fa-map-marker-alt text-lg"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-primary mb-2">Visit Our Store</h3>
+                                    <p class="text-warm-gray-700">
+                                        123 Book Street, Literary District<br>
+                                        Mumbai, Maharashtra 400001<br>
+                                        India
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-warm-gray-50 rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-primary text-white rounded-full p-3">
+                                    <i class="fas fa-phone text-lg"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-primary mb-2">Call Us</h3>
+                                    <p class="text-warm-gray-700">
+                                        <a href="tel:+919876543210" class="hover:text-primary transition-colors">+91 98765 43210</a><br>
+                                        <span class="text-sm">Mon - Sat: 9:00 AM - 8:00 PM<br>Sun: 10:00 AM - 6:00 PM</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-warm-gray-50 rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-primary text-white rounded-full p-3">
+                                    <i class="fas fa-envelope text-lg"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-primary mb-2">Email Us</h3>
+                                    <p class="text-warm-gray-700">
+                                        <a href="mailto:hello@bookhaven.com" class="hover:text-primary transition-colors">hello@bookhaven.com</a><br>
+                                        <a href="mailto:support@bookhaven.com" class="hover:text-primary transition-colors">support@bookhaven.com</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-warm-gray-50 rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-primary text-white rounded-full p-3">
+                                    <i class="fas fa-comments text-lg"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-primary mb-2">Live Chat</h3>
+                                    <p class="text-warm-gray-700 mb-2">
+                                        Chat with our book experts for instant help
+                                    </p>
+                                    <button class="bg-secondary text-primary px-4 py-2 rounded-lg font-semibold hover:bg-yellow-500 transition-colors">
+                                        Start Chat
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Media -->
+                    <div>
+                        <h3 class="font-semibold text-primary mb-4">Follow Us</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition-colors">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="bg-blue-400 text-white p-3 rounded-full hover:bg-blue-500 transition-colors">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="bg-pink-600 text-white p-3 rounded-full hover:bg-pink-700 transition-colors">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="bg-blue-800 text-white p-3 rounded-full hover:bg-blue-900 transition-colors">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="py-16 bg-warm-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-serif text-3xl font-bold text-primary mb-4">Find Our Bookstore</h2>
+                <p class="text-lg text-warm-gray-600">Located in the heart of the literary district</p>
+            </div>
+            
+            <!-- Mock Map -->
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                <div class="bg-gradient-to-br from-primary to-secondary h-96 flex items-center justify-center relative">
+                    <div class="text-center text-white">
+                        <i class="fas fa-map-marker-alt text-6xl mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">BookHaven Location</h3>
+                        <p class="text-lg">123 Book Street, Literary District</p>
+                        <p class="text-sm opacity-90">Mumbai, Maharashtra 400001</p>
+                        <div class="mt-6 space-x-4">
+                            <button class="bg-white text-primary px-6 py-2 rounded-lg font-semibold hover:bg-warm-gray-100 transition-colors">
+                                <i class="fas fa-directions mr-2"></i>Get Directions
+                            </button>
+                            <button class="border-2 border-white text-white px-6 py-2 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors">
+                                <i class="fas fa-street-view mr-2"></i>Street View
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Decorative Elements -->
+                    <div class="absolute top-4 left-4 opacity-30">
+                        <i class="fas fa-book text-3xl"></i>
+                    </div>
+                    <div class="absolute bottom-4 right-4 opacity-30">
+                        <i class="fas fa-bookmark text-2xl"></i>
+                    </div>
+                </div>
+                
+                <!-- Store Information -->
+                <div class="p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <i class="fas fa-clock text-2xl text-primary mb-3"></i>
+                            <h4 class="font-semibold text-primary mb-2">Store Hours</h4>
+                            <p class="text-sm text-warm-gray-700">
+                                Mon - Sat: 9:00 AM - 8:00 PM<br>
+                                Sun: 10:00 AM - 6:00 PM
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-car text-2xl text-primary mb-3"></i>
+                            <h4 class="font-semibold text-primary mb-2">Parking</h4>
+                            <p class="text-sm text-warm-gray-700">
+                                Free parking available<br>
+                                2 hours complimentary
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-wheelchair text-2xl text-primary mb-3"></i>
+                            <h4 class="font-semibold text-primary mb-2">Accessibility</h4>
+                            <p class="text-sm text-warm-gray-700">
+                                Wheelchair accessible<br>
+                                Elevator available
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-serif text-3xl font-bold text-primary mb-4">Frequently Asked Questions</h2>
+                <p class="text-lg text-warm-gray-600">Quick answers to common questions</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="faq-item border border-warm-gray-200 rounded-lg">
+                    <button class="faq-question w-full px-6 py-4 text-left font-semibold text-primary hover:bg-warm-gray-50 transition-colors flex justify-between items-center">
+                        <span>Do you offer book recommendations?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 py-4 border-t border-warm-gray-200 bg-warm-gray-50">
+                        <p class="text-warm-gray-700">Absolutely! Our expert book curators are passionate about helping you find your next great read. You can ask for recommendations in person, through our contact form, or via live chat.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item border border-warm-gray-200 rounded-lg">
+                    <button class="faq-question w-full px-6 py-4 text-left font-semibold text-primary hover:bg-warm-gray-50 transition-colors flex justify-between items-center">
+                        <span>Can I order books that are not in stock?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 py-4 border-t border-warm-gray-200 bg-warm-gray-50">
+                        <p class="text-warm-gray-700">Yes! We can special order most books for you. Contact us with the title and author information, and we'll do our best to get it for you within 7-10 business days.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item border border-warm-gray-200 rounded-lg">
+                    <button class="faq-question w-full px-6 py-4 text-left font-semibold text-primary hover:bg-warm-gray-50 transition-colors flex justify-between items-center">
+                        <span>Do you host author events or book clubs?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 py-4 border-t border-warm-gray-200 bg-warm-gray-50">
+                        <p class="text-warm-gray-700">We regularly host author readings, book signings, and book club meetings. Check our events calendar on our blog page or subscribe to our newsletter to stay updated on upcoming events.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item border border-warm-gray-200 rounded-lg">
+                    <button class="faq-question w-full px-6 py-4 text-left font-semibold text-primary hover:bg-warm-gray-50 transition-colors flex justify-between items-center">
+                        <span>What is your return policy?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 py-4 border-t border-warm-gray-200 bg-warm-gray-50">
+                        <p class="text-warm-gray-700">We accept returns of new, unopened books within 30 days of purchase with a receipt. Books must be in original condition. Gift receipts are also accepted for returns.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-warm-gray-900 text-warm-gray-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-book-open text-2xl text-secondary"></i>
+                        <span class="font-serif text-2xl font-bold text-white">BookHaven</span>
+                    </div>
+                    <p class="text-warm-gray-400 mb-4 max-w-md">
+                        Your trusted companion for discovering remarkable books. We believe every reader deserves to find their perfect next story.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-warm-gray-400 hover:text-secondary transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-warm-gray-400 hover:text-secondary transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-warm-gray-400 hover:text-secondary transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-warm-gray-400 hover:text-secondary transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="hover:text-secondary transition-colors">About Us</a></li>
+                        <li><a href="contact.html" class="hover:text-secondary transition-colors">Contact</a></li>
+                        <li><a href="offers.html" class="hover:text-secondary transition-colors">Special Offers</a></li>
+                        <li><a href="blog.html" class="hover:text-secondary transition-colors">Book Blog</a></li>
+                        <li><a href="#" class="hover:text-secondary transition-colors">Book Club</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Contact Info</h3>
+                    <div class="space-y-2">
+                        <p class="flex items-center">
+                            <i class="fas fa-phone mr-2"></i>
+                            <span>+91 98765 43210</span>
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <span>hello@bookhaven.com</span>
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span>123 Book Street, Literary District</span>
+                        </p>
+                        <p class="text-sm text-warm-gray-400">
+                            Mon - Sat: 9:00 AM - 8:00 PM<br>
+                            Sun: 10:00 AM - 6:00 PM
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-warm-gray-700 mt-8 pt-8 text-center">
+                <p class="text-warm-gray-400">
+                    © 2024 BookHaven. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for book lovers.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/contact.js"></script>
+</body>
+</html>
